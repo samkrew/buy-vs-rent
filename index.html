@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy vs. Rent Long-Term Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Buy vs. Rent Long-Term Calculator</h1>
+            <p class="text-md sm:text-lg text-gray-600 mt-2">Compare the financial outcome of buying vs. renting over a custom period.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Buy Section -->
+            <div class="bg-white p-6 rounded-2xl shadow-lg h-fit">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Scenario 1: Buy Property</h2>
+                
+                <div class="space-y-5">
+                    <div>
+                        <label for="propertyPrice" class="block text-sm font-medium text-gray-700 mb-1">Property Price (AED)</label>
+                        <input type="number" id="propertyPrice" value="1000000" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                     <div>
+                        <label for="downPayment" class="block text-sm font-medium text-gray-700 mb-1">Down Payment (AED)</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="downPayment" value="200000" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <button id="set20PercentBtn" class="flex-shrink-0 px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-medium text-sm">20%</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="interestRate" class="block text-sm font-medium text-gray-700 mb-1">Interest Rate (%)</label>
+                        <input type="number" id="interestRate" value="4.5" step="0.01" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    <div>
+                        <label for="loanTerm" class="block text-sm font-medium text-gray-700 mb-1">Loan Term (Years)</label>
+                        <input type="number" id="loanTerm" value="25" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                     <div>
+                        <label for="annualServiceFee" class="block text-sm font-medium text-gray-700 mb-1">Annual Service Fee (AED)</label>
+                        <input type="number" id="annualServiceFee" value="5000" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                     <div>
+                        <label for="propertyAppreciation" class="block text-sm font-medium text-gray-700 mb-1">Annual Property Appreciation (%)</label>
+                        <input type="number" id="propertyAppreciation" value="3" step="0.1" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Buy Summary</h3>
+                     <div class="space-y-2">
+                         <div class="flex justify-between items-center bg-gray-200 p-3 rounded-lg font-bold">
+                            <span class="text-gray-800">Total Upfront Cost</span>
+                            <span id="totalUpfrontCost" class="text-gray-900">AED 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-blue-50 p-4 rounded-lg mt-2">
+                            <span class="font-medium text-blue-800">Monthly Payment</span>
+                            <span id="totalMonthlyBuyPayment" class="font-bold text-xl text-blue-900">AED 0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rent Section -->
+            <div class="bg-white p-6 rounded-2xl shadow-lg h-fit">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-4">Scenario 2: Rent Property</h2>
+                <div class="space-y-5">
+                    <div>
+                        <label for="annualRent" class="block text-sm font-medium text-gray-700 mb-1">Property Annual Rent (AED)</label>
+                        <input type="number" id="annualRent" value="60000" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                    </div>
+                     <div>
+                        <label for="rentIncrease" class="block text-sm font-medium text-gray-700 mb-1">Annual Rent Increase (%)</label>
+                        <input type="number" id="rentIncrease" value="3" step="0.1" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                    </div>
+                    <div>
+                        <label for="depositApy" class="block text-sm font-medium text-gray-700 mb-1">Investment APY on Upfront Costs (%)</label>
+                        <input type="number" id="depositApy" value="5" step="0.1" class="w-full p-3 bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
+                    </div>
+                </div>
+                <div class="mt-8 pt-6 border-t">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Rent Summary</h3>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center p-3 rounded-lg bg-gray-100">
+                            <span class="text-gray-600">Initial Investable Amount</span>
+                            <span id="depositAmount" class="font-semibold text-gray-800">AED 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-green-50 p-4 rounded-lg mt-2">
+                            <span class="font-medium text-green-800">Initial Monthly Payment</span>
+                            <span id="totalMonthlyRentPayment" class="font-bold text-xl text-green-900">AED 0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Long-Term Outlook Summary -->
+        <footer class="mt-8 bg-white p-6 rounded-2xl shadow-lg">
+             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6 border-b pb-6">
+                <label for="yearsToProject" class="block text-lg font-medium text-gray-700">Projection Period:</label>
+                <input type="number" id="yearsToProject" value="10" class="w-24 p-2 text-center bg-gray-100 border border-gray-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition">
+                <span class="text-lg font-medium text-gray-700">Years</span>
+             </div>
+             <h2 id="outlookTitle" class="text-2xl font-bold mb-6 text-center text-gray-800"></h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+                 <!-- Buy Outlook -->
+                 <div>
+                     <h3 class="text-lg font-bold text-blue-800 mb-2">Buy Scenario Net Position</h3>
+                     <p id="buyNetPosition" class="text-3xl font-bold text-blue-600">AED 0</p>
+                     <div class="text-sm text-gray-600 mt-2 space-y-1">
+                         <p>Future Property Value: <span id="futurePropertyValue" class="font-medium"></span></p>
+                         <p>Remaining Loan: <span id="remainingLoan" class="font-medium"></span></p>
+                     </div>
+                 </div>
+                 <!-- Rent Outlook -->
+                 <div>
+                     <h3 class="text-lg font-bold text-green-800 mb-2">Rent Scenario Net Position</h3>
+                     <p id="rentNetPosition" class="text-3xl font-bold text-green-600">AED 0</p>
+                      <div class="text-sm text-gray-600 mt-2 space-y-1">
+                         <p>Investment Future Value: <span id="investmentFutureValue" class="font-medium"></span></p>
+                         <p>Total Rent Paid: <span id="totalRentPaid" class="font-medium"></span></p>
+                     </div>
+                 </div>
+             </div>
+             <div id="comparisonResult" class="mt-6 text-center text-xl font-semibold p-4 rounded-lg">
+                <!-- Result will be injected here -->
+             </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // DOM Elements
+        const propertyPriceEl = document.getElementById('propertyPrice');
+        const downPaymentEl = document.getElementById('downPayment');
+        const interestRateEl = document.getElementById('interestRate');
+        const loanTermEl = document.getElementById('loanTerm');
+        const annualServiceFeeEl = document.getElementById('annualServiceFee');
+        const propertyAppreciationEl = document.getElementById('propertyAppreciation');
+        const set20PercentBtn = document.getElementById('set20PercentBtn');
+        const annualRentEl = document.getElementById('annualRent');
+        const rentIncreaseEl = document.getElementById('rentIncrease');
+        const depositApyEl = document.getElementById('depositApy');
+        const yearsToProjectEl = document.getElementById('yearsToProject');
+
+        // Buy Summary Elements
+        const totalUpfrontCostEl = document.getElementById('totalUpfrontCost');
+        const totalMonthlyBuyPaymentEl = document.getElementById('totalMonthlyBuyPayment');
+        
+        // Rent Summary Elements
+        const depositAmountEl = document.getElementById('depositAmount');
+        const totalMonthlyRentPaymentEl = document.getElementById('totalMonthlyRentPayment');
+
+        // Outlook Elements
+        const outlookTitleEl = document.getElementById('outlookTitle');
+        const buyNetPositionEl = document.getElementById('buyNetPosition');
+        const futurePropertyValueEl = document.getElementById('futurePropertyValue');
+        const remainingLoanEl = document.getElementById('remainingLoan');
+        const rentNetPositionEl = document.getElementById('rentNetPosition');
+        const investmentFutureValueEl = document.getElementById('investmentFutureValue');
+        const totalRentPaidEl = document.getElementById('totalRentPaid');
+        const comparisonResultEl = document.getElementById('comparisonResult');
+
+        // Utility to format currency
+        const formatCurrency = (value) => new Intl.NumberFormat('en-AE', { style: 'currency', currency: 'AED' }).format(value);
+
+        function set20PercentDownPayment() {
+            const propertyPrice = parseFloat(propertyPriceEl.value);
+            if (!isNaN(propertyPrice) && propertyPrice > 0) {
+                downPaymentEl.value = (propertyPrice * 0.20).toFixed(0);
+                updateComparison();
+            }
+        }
+
+        function updateComparison() {
+            // --- COMMON INPUTS ---
+            const propertyPrice = parseFloat(propertyPriceEl.value) || 0;
+            const downPayment = parseFloat(downPaymentEl.value) || 0;
+            const annualInterestRate = parseFloat(interestRateEl.value) || 0;
+            const loanTermYears = parseInt(loanTermEl.value) || 0;
+            const annualServiceFee = parseFloat(annualServiceFeeEl.value) || 0;
+            const propertyAppreciation = parseFloat(propertyAppreciationEl.value) / 100 || 0;
+            const annualRent = parseFloat(annualRentEl.value) || 0;
+            const rentIncrease = parseFloat(rentIncreaseEl.value) / 100 || 0;
+            const depositApy = parseFloat(depositApyEl.value) / 100 || 0;
+            const yearsToProject = parseInt(yearsToProjectEl.value) || 10;
+
+            // Update outlook title
+            outlookTitleEl.textContent = `${yearsToProject}-Year Financial Outlook`;
+
+            // --- BUY CALCULATION ---
+            const principal = propertyPrice - downPayment;
+            const dldFee = propertyPrice * 0.04;
+            const agentFee = propertyPrice * 0.02;
+            const processingFee = principal > 0 ? principal * 0.01 : 0;
+            const totalUpfrontCost = downPayment + dldFee + agentFee + processingFee;
+            totalUpfrontCostEl.textContent = formatCurrency(totalUpfrontCost);
+
+            let monthlyMortgagePayment = 0;
+            if (principal > 0 && annualInterestRate > 0 && loanTermYears > 0) {
+                const monthlyInterestRate = annualInterestRate / 100 / 12;
+                const numberOfPayments = loanTermYears * 12;
+                monthlyMortgagePayment = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) / 
+                    (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+            }
+            const monthlyServiceFee = annualServiceFee / 12;
+            const totalMonthlyBuyPayment = monthlyMortgagePayment + monthlyServiceFee;
+            totalMonthlyBuyPaymentEl.textContent = formatCurrency(totalMonthlyBuyPayment);
+
+            // X-Year Buy Outlook
+            const futurePropertyValue = propertyPrice * Math.pow(1 + propertyAppreciation, yearsToProject);
+            let remainingLoan = 0;
+            if (principal > 0 && monthlyMortgagePayment > 0 && yearsToProject <= loanTermYears) {
+                 const monthlyInterestRate = annualInterestRate / 100 / 12;
+                 remainingLoan = principal * Math.pow(1 + monthlyInterestRate, yearsToProject * 12) - (monthlyMortgagePayment / monthlyInterestRate) * (Math.pow(1 + monthlyInterestRate, yearsToProject * 12) - 1);
+            }
+            const equity = futurePropertyValue - remainingLoan;
+            const buyNetPosition = equity - totalUpfrontCost;
+            buyNetPositionEl.textContent = formatCurrency(buyNetPosition);
+            futurePropertyValueEl.textContent = formatCurrency(futurePropertyValue);
+            remainingLoanEl.textContent = formatCurrency(remainingLoan < 0 ? 0 : remainingLoan);
+            
+
+            // --- RENT CALCULATION ---
+            const investableAmount = totalUpfrontCost;
+            depositAmountEl.textContent = formatCurrency(investableAmount);
+
+            const initialMonthlyRent = annualRent / 12 + (annualRent * 0.05) / 12;
+            totalMonthlyRentPaymentEl.textContent = formatCurrency(initialMonthlyRent);
+            
+            // X-Year Rent Outlook
+            let totalRentPaid = 0;
+            let currentAnnualRent = annualRent;
+            let totalMonthlyPaymentsForRentScenario = 0;
+            for(let i=0; i < yearsToProject; i++){
+                const rentForYear = currentAnnualRent + (currentAnnualRent * 0.05);
+                totalRentPaid += rentForYear;
+                totalMonthlyPaymentsForRentScenario += rentForYear;
+                currentAnnualRent *= (1 + rentIncrease);
+            }
+
+            // We need to compare apples to apples. If we rent, we invest the difference in monthly payments.
+            let investmentFutureValue = investableAmount * Math.pow(1 + depositApy, yearsToProject);
+            for (let i = 0; i < yearsToProject * 12; i++) {
+                let currentRent = (annualRent * Math.pow(1 + rentIncrease, Math.floor(i / 12))) / 12;
+                let currentRentPayment = currentRent + (currentRent*0.05);
+                let monthlyDifference = totalMonthlyBuyPayment - currentRentPayment;
+                if (monthlyDifference > 0) {
+                     investmentFutureValue += monthlyDifference * Math.pow(1 + depositApy/12, yearsToProject * 12 - i);
+                }
+            }
+            
+            const rentNetPosition = investmentFutureValue - totalRentPaid;
+            rentNetPositionEl.textContent = formatCurrency(rentNetPosition);
+            investmentFutureValueEl.textContent = formatCurrency(investmentFutureValue);
+            totalRentPaidEl.textContent = formatCurrency(totalRentPaid);
+
+
+            // --- FINAL COMPARISON ---
+            if (buyNetPosition !== 0 || rentNetPosition !== 0) {
+                const difference = buyNetPosition - rentNetPosition;
+                if (difference > 0) {
+                    comparisonResultEl.innerHTML = `After ${yearsToProject} years, buying is projected to be the better financial decision by <span class="text-blue-600">${formatCurrency(difference)}</span>.`;
+                    comparisonResultEl.className = 'mt-6 text-center text-xl font-semibold p-4 rounded-lg bg-blue-100 text-blue-800';
+                } else {
+                    comparisonResultEl.innerHTML = `After ${yearsToProject} years, renting is projected to be the better financial decision by <span class="text-green-600">${formatCurrency(Math.abs(difference))}</span>.`;
+                    comparisonResultEl.className = 'mt-6 text-center text-xl font-semibold p-4 rounded-lg bg-green-100 text-green-800';
+                }
+            } else {
+                comparisonResultEl.innerHTML = `Enter details to see a ${yearsToProject}-year projection.`;
+                comparisonResultEl.className = 'mt-6 text-center text-xl font-semibold p-4 rounded-lg bg-gray-100 text-gray-800';
+            }
+        }
+
+        // Event Listeners
+        const allInputs = [propertyPriceEl, downPaymentEl, interestRateEl, loanTermEl, annualServiceFeeEl, propertyAppreciationEl, annualRentEl, rentIncreaseEl, depositApyEl, yearsToProjectEl];
+        allInputs.forEach(input => input.addEventListener('input', updateComparison));
+        set20PercentBtn.addEventListener('click', set20PercentDownPayment);
+
+        // Initial setup
+        window.onload = updateComparison;
+    </script>
+</body>
+</html>
